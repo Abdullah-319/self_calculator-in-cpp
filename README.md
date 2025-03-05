@@ -30,18 +30,25 @@ Enter the second name: Ahmad
 
 ### Output:
 ```
-Common alphabets: a d a h
-Result: F
+🌟 Welcome to the Love Calculator! 🌟
+--------------------------------------
+Enter first name: abdullah
+Enter second name: ahmad
+Common alphabets: a d a h 
+--------------------------------------
+Remaining count: 5
+Your relationship status is: Friends
+--------------------------------------
 ```
 
 ## Installation & Running the Program
 1. Clone the repository:
    ```sh
-   git clone https://github.com/abdullah319/self-name-matcher.git
+   git clone https://github.com/Abdullah-319/self_calculator-in-cpp.git
    ```
 2. Navigate to the project folder:
    ```sh
-   cd self-name-matcher
+   cd self_calculator-in-cpp
    ```
 3. Compile the program:
    ```sh
