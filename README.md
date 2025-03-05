@@ -3,8 +3,8 @@
 This is a simple C++ program that takes two names as input and removes common letters between them. The remaining characters are counted and used to determine a relationship status based on the acronym **SELF**:
 
 - **S** - Single
-- **E** - Enemy
-- **L** - Love
+- **E** - Enemies
+- **L** - Lovers
 - **F** - Friends
 
 ## Features
@@ -63,13 +63,7 @@ Your relationship status is: Friends
 - A C++ compiler (e.g., g++, Clang, MSVC)
 - Any operating system (Windows, macOS, Linux)
 
-## Contributing
-Feel free to fork this repository and submit pull requests with improvements or bug fixes.
-
-## License
-This project is licensed under the MIT License. See the LICENSE file for details.
-
 ---
 
-Happy coding! 🚀
+Happy coding! 🚀💜
 
