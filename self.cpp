@@ -7,13 +7,14 @@ using namespace std;
 // Function to remove common characters and return the count of remaining characters
 int removeCommonCharacters(string &name1, string &name2)
 {
+    string tempName2 = name2; // Copy of name2 to track modifications
     for (char &c : name1)
     {
-        size_t pos = name2.find(c);
+        size_t pos = tempName2.find(c);
         if (pos != string::npos)
         {
             // Cancel common character
-            name2.erase(pos, 1);
+            tempName2.erase(pos, 1);
             c = '*'; // Mark as removed
         }
     }
@@ -21,52 +22,74 @@ int removeCommonCharacters(string &name1, string &name2)
     // Count remaining characters
     int count1 = count_if(name1.begin(), name1.end(), [](char c)
                           { return c != '*'; });
-    int count2 = name2.length();
+    int count2 = tempName2.length();
     return count1 + count2;
 }
 
-// Function to calculate the result based on the remaining count
-string calculateSELF(int remainingCount)
+// Function to calculate the relationship status
+string calculateRelationship(int remainingCount)
 {
-    string outcomes = "SELF";
-    while (outcomes.length() > 1)
+    string outcomes[] = {"Single", "Enemies", "Lovers", "Friends"};
+    int index = 0;
+
+    while (outcomes[1] != "")
     {
-        int removeIndex = (remainingCount % outcomes.length()) - 1;
+        int removeIndex = (remainingCount % 4) - 1;
         if (removeIndex < 0)
         {
-            removeIndex += outcomes.length();
+            removeIndex += 4;
         }
-        outcomes.erase(removeIndex, 1);
+
+        for (int i = removeIndex; i < 3; i++)
+        {
+            outcomes[i] = outcomes[i + 1]; // Shift elements left
+        }
+        outcomes[3] = ""; // Remove last element
     }
-    return outcomes;
+
+    return outcomes[0];
 }
 
 int main()
 {
-    cout << "Hello baby" << endl;
-    cout << "Welcome to this imaginary love world" << endl;
-    cout << "Here we go!" << endl;
+    cout << "🌟 Welcome to the Love Calculator! 🌟" << endl;
+    cout << "--------------------------------------" << endl;
 
     string name1, name2;
 
     // Get user input
-    cout << "Enter first name: " << endl;
+    cout << "Enter first name: ";
     cin >> name1;
-    cout << "Enter second name: " << endl;
+    cout << "Enter second name: ";
     cin >> name2;
 
-    // Find common alphabets and display
+    // Convert names to lowercase for case-insensitivity
+    transform(name1.begin(), name1.end(), name1.begin(), ::tolower);
+    transform(name2.begin(), name2.end(), name2.begin(), ::tolower);
+
+    // Find and display all occurrences of common alphabets
     cout << "Common alphabets: ";
-    for (int i = 0; i < name1.length(); ++i)
+    string commonLetters = "";
+    string tempName2 = name2; // Copy to track modifications
+
+    for (char c : name1)
     {
-        for (int j = 0; j < name2.length(); ++j)
+        size_t pos = tempName2.find(c);
+        if (pos != string::npos)
         {
-            if (name1[i] == name2[j])
-            {
-                cout << name1[i] << " ";
-                break;
-            }
+            commonLetters += c;
+            commonLetters += " ";
+            tempName2.erase(pos, 1); // Remove only the first occurrence
         }
+    }
+
+    if (commonLetters.empty())
+    {
+        cout << "None";
+    }
+    else
+    {
+        cout << commonLetters;
     }
     cout << endl;
 
@@ -74,10 +97,13 @@ int main()
     int remainingCount = removeCommonCharacters(name1, name2);
 
     // Calculate the result
-    string result = calculateSELF(remainingCount);
+    string result = calculateRelationship(remainingCount);
 
     // Display the result
-    cout << "Result: " << result << endl;
+    cout << "--------------------------------------" << endl;
+    cout << "Remaining count: " << remainingCount << endl;
+    cout << "Your relationship status is: " << result << endl;
+    cout << "--------------------------------------" << endl;
 
     return 0;
 }
